@@ -1,0 +1,17 @@
+syntax = "proto3";
+package telemetry.v1;
+
+message Vec3 {
+  float x = 1;
+  float y = 2;
+  float z = 3;
+}
+
+// Bench USB stream: each payload is prefixed by its byte length as a varint.
+// Both vectors must be present and use the BMI270 package axes.
+message ImuSample {
+  uint32 seq = 1;                 // Increments per acquired sample; resets on boot.
+  uint64 sample_time_us = 2;      // Monotonic microseconds since boot at acquisition.
+  Vec3 specific_force_m_s2 = 3;   // Accelerometer reading in m/s^2.
+  Vec3 angular_rate_rad_s = 4;    // Gyroscope reading in rad/s.
+}
