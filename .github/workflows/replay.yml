@@ -15,5 +15,6 @@ jobs:
       - uses: astral-sh/setup-uv@v10.3.3
         with:
           python-version: "3.12"
+          cache-dependency-glob: replay_check.py
       - name: Compile the schema and replay partial USB reads
         run: uv run --script replay_check.py
